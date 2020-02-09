@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Home">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="50dp"
+        android:text="Candidate Evaluation System"
+        android:textAllCaps="true"
+        android:autoSizeTextType="uniform"
+        android:autoSizeMinTextSize="12sp"
+        android:autoSizeMaxTextSize="100dp"
+        android:autoSizeStepGranularity="2dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:id="@+id/title"
+        android:textColor="#000"
+        android:fontFamily="serif"
+        tools:targetApi="M"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Apply For Job"
+        android:background="@drawable/button"
+        android:layout_marginBottom="20dp"
+        android:textColor="#fff"
+        android:id="@+id/apply"
+        android:layout_above="@id/login"
+        android:textSize="15dp"
+        android:fontFamily="serif"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:id="@+id/login"
+        android:background="@drawable/button"
+        android:layout_marginBottom="20dp"
+        android:textColor="#fff"
+        android:textSize="15dp"
+        android:fontFamily="serif"
+        android:layout_alignParentBottom="true"
+        />
+
+</RelativeLayout>
