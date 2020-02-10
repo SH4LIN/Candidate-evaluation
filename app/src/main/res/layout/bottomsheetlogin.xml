@@ -31,7 +31,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="20dp"
                     android:fontFamily="serif"
-                    android:text="OTP Verification"
+                    android:text="Login"
                     android:textColor="#ffffff"
                     android:textStyle="bold"
                     android:textSize="20dp"
@@ -41,7 +41,7 @@
 
             <androidx.cardview.widget.CardView
                 android:layout_width="300dp"
-                android:id="@+id/otp"
+                android:id="@+id/logincard"
                 android:layout_height="wrap_content"
                 android:padding="100dp"
                 android:layout_below="@+id/top"
@@ -56,7 +56,7 @@
                     android:layout_height="match_parent">
 
                     <TextView
-                        android:id="@+id/txt"
+                        android:id="@+id/msgenter"
                         android:textSize="20dp"
                         android:fontFamily="serif"
                         android:layout_width="wrap_content"
@@ -68,8 +68,8 @@
                     <EditText
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/txt"
-                        android:id="@+id/phoneno"
+                        android:layout_below="@id/msgenter"
+                        android:id="@+id/username"
                         android:animateLayoutChanges="true"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="10dp"
@@ -78,50 +78,40 @@
                         android:maxLength="10"
                         android:inputType="number" />
 
-                    <com.mukesh.OtpView
+                    <TextView
+                        android:id="@+id/msgpass"
+                        android:layout_below="@id/username"
+                        android:textSize="20dp"
+                        android:fontFamily="serif"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/phoneno"
-                        android:inputType="number"
-                        app:itemCount="6"
-                        android:animateLayoutChanges="true"
-                        app:itemHeight="30dp"
-                        app:itemWidth="30dp"
-                        android:id="@+id/otp_view"
-                        app:lineColor="#000000"
-                        app:viewType="line"
-                        app:cursorWidth="1dp"
-                        android:visibility="invisible"
                         android:layout_centerHorizontal="true"
-                        android:layout_marginBottom="10dp"
-                        />
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="53dp"
-                        android:layout_below="@id/otp_view"
-                        android:layout_marginLeft="50dp"
-                        android:layout_marginRight="50dp"
-                        android:text="Verify"
+                        android:layout_marginTop="30dp"
+                        android:text="Enter Password" />
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/msgpass"
+                        android:id="@+id/password"
                         android:animateLayoutChanges="true"
-                        android:visibility="invisible"
-                        android:textStyle="bold"
-                        android:textSize="10dp"
-                        android:id="@+id/verify"
-                        android:textColor="#ffffff"
-                        android:layout_marginBottom="10dp"
-                        android:background="@drawable/button"
                         android:layout_centerHorizontal="true"
-                        />
+                        android:layout_marginTop="10dp"
+                        android:layout_centerInParent="true"
+                        android:ems="10"
+                        android:layout_marginBottom="20dp"
+                        android:maxLength="10"
+                        android:inputType="number" />
 
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="50dp"
-                android:layout_below="@id/otp"
-                android:text="Submit"
+                android:layout_marginLeft="55dp"
+                android:layout_marginRight="55dp"
+                android:layout_below="@id/logincard"
+                android:text="Login"
                 android:textStyle="bold"
                 android:fontFamily="serif"
                 android:id="@+id/submit"

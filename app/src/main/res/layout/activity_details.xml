@@ -33,6 +33,7 @@
                 android:layout_height="wrap_content"
                 android:text="Personal Details"
                 android:id="@+id/title"
+                android:fontFamily="serif"
                 android:layout_centerHorizontal="true"
                 android:textSize="30dp"
                 android:layout_marginTop="10dp"/>
@@ -162,6 +163,7 @@
                 android:layout_below="@id/input_layout_mobilenumber"
                 android:background="@drawable/button"
                 android:textColor="#fff"
+                android:fontFamily="serif"
                 android:layout_marginEnd="30dp"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="20dp"/>

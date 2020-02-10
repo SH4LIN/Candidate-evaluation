@@ -6,14 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.transition.Fade;
-import android.transition.Transition;
-import android.transition.TransitionManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -38,7 +34,7 @@ public class Home extends AppCompatActivity {
     Button login,apply,next,verify;
     OtpView otpView;
     EditText phoneno;
-    BottomSheetDialog bottomSheetDialog;
+    BottomSheetDialog bottomSheetDialog,bottomSheetDialogLogin;
     private FirebaseUser user;
     private ProgressBar progress;
     private FirebaseAuth mAuth;
@@ -47,8 +43,8 @@ public class Home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        login = (Button) findViewById(R.id.login);
-        apply = (Button) findViewById(R.id.apply);
+        findViewsById();
+        login.setOnClickListener(mlogin);
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,13 +57,12 @@ public class Home extends AppCompatActivity {
                 else {
                     bottomSheetDialog = new BottomSheetDialog(Home.this, R.style.BottomSheetDialogTheme);
                     bottomSheetDialog.setContentView(R.layout.bottomsheet);
-                    bottomSheetDialog.setCanceledOnTouchOutside(false);
-                    mAuth = FirebaseAuth.getInstance();
                     phoneno = (EditText) bottomSheetDialog.findViewById(R.id.phoneno);
                     verify = (Button) bottomSheetDialog.findViewById(R.id.verify);
-                    next = bottomSheetDialog.findViewById(R.id.submit);
+                    next = (Button) bottomSheetDialog.findViewById(R.id.submit);
                     otpView = (OtpView) bottomSheetDialog.findViewById(R.id.otp_view);
                     progress = (ProgressBar) bottomSheetDialog.findViewById(R.id.progressBar);
+                    bottomSheetDialog.setCanceledOnTouchOutside(false);
                     bottomSheetDialog.show();
                     phoneno.addTextChangedListener(new TextWatcher() {
                         @Override
@@ -183,6 +178,18 @@ public class Home extends AppCompatActivity {
     };
 
     private void findViewsById(){
-
+        login = (Button) findViewById(R.id.login);
+        apply = (Button) findViewById(R.id.apply);
+        mAuth = FirebaseAuth.getInstance();
     }
+
+    View.OnClickListener mlogin = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            bottomSheetDialogLogin = new BottomSheetDialog(Home.this, R.style.BottomSheetDialogTheme);
+            bottomSheetDialogLogin.setContentView(R.layout.bottomsheetlogin);
+            bottomSheetDialogLogin.setCanceledOnTouchOutside(false);
+            bottomSheetDialogLogin.show();
+        }
+    };
 }
