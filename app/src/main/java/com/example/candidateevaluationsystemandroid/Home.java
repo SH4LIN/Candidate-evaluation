@@ -1,18 +1,32 @@
 package com.example.candidateevaluationsystemandroid;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.transition.Fade;
+import android.transition.Transition;
+import android.transition.TransitionManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
-
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.TaskExecutors;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.firebase.FirebaseException;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
+import com.google.firebase.auth.PhoneAuthCredential;
+import com.google.firebase.auth.PhoneAuthProvider;
+import com.mukesh.OtpView;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -21,10 +35,14 @@ public class Home extends AppCompatActivity {
    private static final String PHONE_NUMBER = "^[6-9][0-9]{9}";
     private Pattern pattern;
     private Matcher matcher;
-    Button login,apply;
-    private FirebaseUser user;
+    Button login,apply,next,verify;
+    OtpView otpView;
     EditText phoneno;
-    BottomSheetDialog dialog;
+    BottomSheetDialog bottomSheetDialog;
+    private FirebaseUser user;
+    private ProgressBar progress;
+    private FirebaseAuth mAuth;
+    private String verificationId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,12 +59,34 @@ public class Home extends AppCompatActivity {
                     startActivity(intent);
                 }
                 else {
-                    dialog = new BottomSheetDialog(Home.this, R.style.BottomSheetDialogTheme);
-                    dialog.setContentView(R.layout.bottomsheet);
-                    dialog.setCanceledOnTouchOutside(false);
-                    phoneno = (EditText) dialog.findViewById(R.id.phoneno);
-                    dialog.show();
-                    Button next = dialog.findViewById(R.id.submit);
+                    bottomSheetDialog = new BottomSheetDialog(Home.this, R.style.BottomSheetDialogTheme);
+                    bottomSheetDialog.setContentView(R.layout.bottomsheet);
+                    bottomSheetDialog.setCanceledOnTouchOutside(false);
+                    mAuth = FirebaseAuth.getInstance();
+                    phoneno = (EditText) bottomSheetDialog.findViewById(R.id.phoneno);
+                    verify = (Button) bottomSheetDialog.findViewById(R.id.verify);
+                    next = bottomSheetDialog.findViewById(R.id.submit);
+                    otpView = (OtpView) bottomSheetDialog.findViewById(R.id.otp_view);
+                    progress = (ProgressBar) bottomSheetDialog.findViewById(R.id.progressBar);
+                    bottomSheetDialog.show();
+                    phoneno.addTextChangedListener(new TextWatcher() {
+                        @Override
+                        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                        }
+
+                        @Override
+                        public void onTextChanged(CharSequence s, int start, int before, int count) {
+                            next.setVisibility(View.VISIBLE);
+                            otpView.setVisibility(View.INVISIBLE);
+                            verify.setVisibility(View.INVISIBLE);
+                        }
+
+                        @Override
+                        public void afterTextChanged(Editable s) {
+
+                        }
+                    });
                     next.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -54,9 +94,25 @@ public class Home extends AppCompatActivity {
                             matcher = pattern.matcher(phoneno.getText().toString());
                             String phonenumber = "+91" + phoneno.getText().toString().trim();
                             if (matcher.find()) {
-                                Intent intent = new Intent(getApplicationContext(), Verification.class);
-                                intent.putExtra("Number", phonenumber);
-                                startActivity(intent);
+                                next.setVisibility(View.INVISIBLE);
+                                otpView.setVisibility(View.VISIBLE);
+                                verify.setVisibility(View.VISIBLE);
+                                sendVerificationCode(phonenumber);
+                                otpView.requestFocus();
+                                verify.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        String code = otpView.getText().toString().trim();
+                                        if(code.isEmpty() || code.length()<6){
+                                            Toast.makeText(getApplicationContext(),"Invalid OTP",Toast.LENGTH_SHORT);
+                                            return;
+                                        }
+                                        else{
+                                            progress.setVisibility(View.VISIBLE);
+                                            verifyCode(code);
+                                        }
+                                    }
+                                });
                             } else {
                                 Toast.makeText(getApplicationContext(), "Enter Valid Phone Number", Toast.LENGTH_SHORT).show();
                             }
@@ -65,6 +121,68 @@ public class Home extends AppCompatActivity {
                 }
             }
         });
+    }
+    private void verifyCode(String code){
+        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId,code);
+        signInWithCredential(credential);
+    }
+
+    private void signInWithCredential(PhoneAuthCredential credential) {
+        mAuth.signInWithCredential(credential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+                    bottomSheetDialog.dismiss();
+                    Intent intent = new Intent(Home.this,Details.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                }
+                else{
+                    Toast.makeText(getApplicationContext(),task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    private void sendVerificationCode(String number){
+        PhoneAuthProvider.getInstance().verifyPhoneNumber(
+                number,
+                60,
+                TimeUnit.SECONDS,
+                TaskExecutors.MAIN_THREAD,
+                mCallBack
+        );
+    }
+    private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallBack = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+        @Override
+        public void onCodeSent(String s, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+            super.onCodeSent(s, forceResendingToken);
+            verificationId = s;
+        }
+
+        @Override
+        public void onCodeAutoRetrievalTimeOut(String s) {
+            super.onCodeAutoRetrievalTimeOut(s);
+        }
+
+        @Override
+        public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
+            String code = phoneAuthCredential.getSmsCode();
+            if(code != null){
+                verify.setEnabled(false);
+                progress.setVisibility(View.VISIBLE);
+                otpView.setText(code);
+                verifyCode(code);
+            }
+        }
+
+        @Override
+        public void onVerificationFailed(FirebaseException e) {
+            Toast.makeText(Home.this,e.getMessage(),Toast.LENGTH_SHORT).show();
+        }
+    };
+
+    private void findViewsById(){
 
     }
 }

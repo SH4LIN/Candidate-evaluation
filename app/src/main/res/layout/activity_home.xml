@@ -27,12 +27,14 @@
 
     <Button
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="56dp"
         android:text="Apply For Job"
         android:background="@drawable/button"
         android:layout_marginBottom="20dp"
         android:textColor="#fff"
         android:id="@+id/apply"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
         android:layout_above="@id/login"
         android:textSize="15dp"
         android:fontFamily="serif"
@@ -40,7 +42,9 @@
 
     <Button
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="56dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
         android:text="Login"
         android:id="@+id/login"
         android:background="@drawable/button"

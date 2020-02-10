@@ -29,7 +29,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="20dp"
                     android:text="OTP Verification"
                     android:textColor="#ffffff"
                     android:textStyle="bold"
@@ -45,12 +45,13 @@
                 android:padding="100dp"
                 android:layout_below="@+id/top"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="-80dp"
+                android:layout_marginTop="-120dp"
                 android:elevation="50dp"
                 >
 
                 <RelativeLayout
                     android:layout_width="match_parent"
+                    android:id="@+id/parent"
                     android:layout_height="match_parent">
 
                     <TextView
@@ -67,19 +68,54 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/txt"
                         android:id="@+id/phoneno"
+                        android:animateLayoutChanges="true"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="10dp"
                         android:layout_centerInParent="true"
-                        android:layout_marginBottom="60dp"
                         android:ems="10"
                         android:maxLength="10"
                         android:inputType="number" />
+
+                    <com.mukesh.OtpView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/phoneno"
+                        android:inputType="number"
+                        app:itemCount="6"
+                        android:animateLayoutChanges="true"
+                        app:itemHeight="30dp"
+                        app:itemWidth="30dp"
+                        android:id="@+id/otp_view"
+                        app:lineColor="#000000"
+                        app:viewType="line"
+                        app:cursorWidth="1dp"
+                        android:visibility="invisible"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="10dp"
+                        />
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_below="@id/otp_view"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginRight="50dp"
+                        android:text="Verify"
+                        android:animateLayoutChanges="true"
+                        android:visibility="invisible"
+                        android:textStyle="bold"
+                        android:textSize="10dp"
+                        android:id="@+id/verify"
+                        android:textColor="#ffffff"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/button"
+                        android:layout_centerHorizontal="true"
+                        />
 
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
             <Button
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="63dp"
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="50dp"
                 android:layout_below="@id/otp"
@@ -87,11 +123,22 @@
                 android:textStyle="bold"
                 android:textSize="20dp"
                 android:id="@+id/submit"
+                android:animateLayoutChanges="true"
                 android:textColor="#ffffff"
                 android:background="@drawable/button"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
                 />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/otp"
+                android:layout_marginTop="-55dp"
+                android:layout_centerHorizontal="true"
+                android:visibility="invisible" />
 
 
         </LinearLayout>
