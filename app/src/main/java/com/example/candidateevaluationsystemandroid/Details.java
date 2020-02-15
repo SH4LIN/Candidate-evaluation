@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
+
 import java.util.Calendar;
 
 public class Details extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
@@ -16,6 +18,7 @@ public class Details extends AppCompatActivity implements DatePickerDialog.OnDat
     private DatePickerDialog datePickerDialog;
     private int day,month,year;
     Button next;
+    Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,8 @@ public class Details extends AppCompatActivity implements DatePickerDialog.OnDat
                 datePickerDialog.show();
             }
         });
+
+
     }
 
     @Override
