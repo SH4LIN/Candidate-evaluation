@@ -89,9 +89,7 @@
                             android:layout_height="match_parent"
                             android:hint="CPI"
                             android:inputType="textEmailAddress"
-                            android:backgroundTint="#0f0"
-                            android:id="@+id/input_cpi"
-                            />
+                            android:backgroundTint="#0f0" />
 
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -111,9 +109,7 @@
                             android:layout_height="match_parent"
                             android:hint="College Passing Year"
                             android:inputType="date"
-                            android:backgroundTint="#0f0"
-                            android:id="@+id/input_passedyear"
-                            />
+                            android:backgroundTint="#0f0" />
 
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -121,7 +117,6 @@
                     <Button
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/send"
                         android:text="Submit"
                         android:layout_below="@id/input_layout_passedyear"
                         android:background="@drawable/button"

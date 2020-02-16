@@ -192,4 +192,11 @@ public class Home extends AppCompatActivity {
             bottomSheetDialogLogin.show();
         }
     };
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        bottomSheetDialog.dismiss();
+        bottomSheetDialogLogin.dismiss();
+    }
 }
