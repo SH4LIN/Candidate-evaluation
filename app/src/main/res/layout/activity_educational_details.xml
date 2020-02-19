@@ -98,6 +98,29 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/input_layout_cpi"
+                        android:id="@+id/input_layout_startyear"
+
+                        android:layout_marginTop="30dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        >
+
+                        <EditText
+                            android:id="@+id/startingyear"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:backgroundTint="#0f0"
+                            android:hint="College Starting Year"
+                            android:inputType="number"
+                            android:maxLength="4" />
+
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/input_layout_startyear"
                         android:id="@+id/input_layout_passedyear"
                         android:layout_marginTop="30dp"
                         android:layout_marginStart="20dp"
@@ -105,12 +128,35 @@
                         >
 
                         <EditText
+                            android:id="@+id/passingyear"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:backgroundTint="#0f0"
                             android:hint="College Passing Year"
-                            android:inputType="date"
-                            android:focusable="false"
-                            android:backgroundTint="#0f0" />
+                            android:inputType="number"
+                            android:maxLength="4" />
+
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/input_layout_passedyear"
+                        android:id="@+id/input_layout_yearexperience"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        >
+
+                        <EditText
+                            android:id="@+id/yearexperience"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:backgroundTint="#0f0"
+                            android:hint="Year of Experience"
+                            android:inputType="number"
+                            android:maxLength="4" />
 
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -119,9 +165,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Next"
-                        android:layout_below="@id/input_layout_passedyear"
+                        android:layout_below="@id/input_layout_yearexperience"
                         android:background="@drawable/button"
                         android:textColor="#fff"
+                        android:id="@+id/next2"
                         android:fontFamily="serif"
                         android:layout_marginBottom="20dp"
                         android:layout_marginEnd="30dp"

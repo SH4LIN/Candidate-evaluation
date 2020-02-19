@@ -21,10 +21,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.mukesh.OtpView;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 
 public class Home extends AppCompatActivity {
    // private static final String PHONE_NUMBER = "^(?:(?:\\+|0{0,2})91(\\s*[\\ -]\\s*)?|[0]?)?[789]\\d{9}|(\\d[ -]?){10}\\d$";
@@ -36,9 +40,12 @@ public class Home extends AppCompatActivity {
     EditText phoneno;
     BottomSheetDialog bottomSheetDialog,bottomSheetDialogLogin;
     private FirebaseUser user;
+    private String phonenumber;
     private ProgressBar progress;
     private FirebaseAuth mAuth;
     private String verificationId;
+    private DocumentReference docRef;
+    private FirebaseFirestore db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,8 +94,9 @@ public class Home extends AppCompatActivity {
                         public void onClick(View v) {
                             pattern = Pattern.compile(PHONE_NUMBER);
                             matcher = pattern.matcher(phoneno.getText().toString());
-                            String phonenumber = "+91" + phoneno.getText().toString().trim();
+                            phonenumber = "+91" + phoneno.getText().toString().trim();
                             if (matcher.find()) {
+                                //docRef = db.collection("Resumes").document(phonenumber);
                                 next.setVisibility(View.INVISIBLE);
                                 otpView.setVisibility(View.VISIBLE);
                                 verify.setVisibility(View.VISIBLE);
@@ -108,7 +116,8 @@ public class Home extends AppCompatActivity {
                                         }
                                     }
                                 });
-                            } else {
+                            }
+                            else {
                                 Toast.makeText(getApplicationContext(), "Enter Valid Phone Number", Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -181,6 +190,7 @@ public class Home extends AppCompatActivity {
         login = (Button) findViewById(R.id.login);
         apply = (Button) findViewById(R.id.apply);
         mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
     }
 
     View.OnClickListener mlogin = new View.OnClickListener() {
@@ -192,11 +202,4 @@ public class Home extends AppCompatActivity {
             bottomSheetDialogLogin.show();
         }
     };
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        bottomSheetDialog.dismiss();
-        bottomSheetDialogLogin.dismiss();
-    }
 }

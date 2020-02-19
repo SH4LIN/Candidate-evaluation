@@ -89,19 +89,22 @@ public class activity_intro extends AppCompatActivity {
         });
 
 
-        tabIndicator.addOnTabSelectedListener(new TabLayout.BaseOnTabSelectedListener() {
+        tabIndicator.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-
-                if (tab.getPosition() == mList.size()-1) {
+                if(tab.getPosition() == mList.size()-1){
                     loaddLastScreen();
                 }
             }
+
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
+
             }
+
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
+
             }
         });
 
