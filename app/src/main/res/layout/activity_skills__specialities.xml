@@ -12,8 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="30dp"
-        app:cardElevation="22sp"
-        >
+        app:cardElevation="22sp">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -46,75 +45,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/title2"
-                        android:id="@+id/input_layout_institute"
+                        android:id="@+id/input_layout_skills"
                         android:layout_marginTop="30dp"
                         android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp"
-                        >
+                        android:layout_marginEnd="20dp">
 
                         <Spinner
-                            android:id="@+id/input_institute"
+                            android:id="@+id/input_skills"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/input_layout_institute"
-                        android:id="@+id/input_layout_studyoffield"
-                        android:layout_marginTop="30dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp"
-                        >
-
-                        <Spinner
-                            android:id="@+id/input_studyoffield"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1" />
-
-
-                    </com.google.android.material.textfield.TextInputLayout>
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/input_layout_studyoffield"
-                        android:id="@+id/input_layout_cpi"
-                        android:layout_marginTop="30dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp"
-                        >
-
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:hint="CPI"
-                            android:inputType="textEmailAddress"
-                            android:backgroundTint="#0f0" />
-
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/input_layout_cpi"
-                        android:id="@+id/input_layout_passedyear"
-                        android:layout_marginTop="30dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp"
-                        >
-
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:hint="College Passing Year"
-                            android:inputType="date"
-                            android:backgroundTint="#0f0" />
-
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -122,7 +62,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Submit"
-                        android:layout_below="@id/input_layout_passedyear"
+                        android:layout_below="@id/input_layout_skills"
                         android:background="@drawable/button"
                         android:textColor="#fff"
                         android:fontFamily="serif"

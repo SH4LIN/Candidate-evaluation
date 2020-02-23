@@ -50,6 +50,7 @@
     </com.google.android.material.tabs.TabLayout>
 
     <Button
+
         android:visibility="invisible"
         android:id="@+id/btn_get_started"
         android:layout_width="132dp"
@@ -59,12 +60,12 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="64dp"
-        android:background="@drawable/btn_gradient_style"
+        android:background="@color/gradient_start_color"
         android:text="Get Started"
         android:textColor="#fff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <TextView
         android:textSize="16sp"
