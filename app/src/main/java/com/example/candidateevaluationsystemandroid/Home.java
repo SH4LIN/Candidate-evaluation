@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,6 +26,9 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.mukesh.OtpView;
+
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -37,10 +41,10 @@ public class Home extends AppCompatActivity {
     private Matcher matcher;
     Button login,apply,next,verify;
     OtpView otpView;
-    EditText phoneno;
+    static EditText phoneno;
     BottomSheetDialog bottomSheetDialog,bottomSheetDialogLogin;
     private FirebaseUser user;
-    private String phonenumber;
+    static String phonenumber = null;
     private ProgressBar progress;
     private FirebaseAuth mAuth;
     private String verificationId;
@@ -96,23 +100,36 @@ public class Home extends AppCompatActivity {
                             matcher = pattern.matcher(phoneno.getText().toString());
                             phonenumber = "+91" + phoneno.getText().toString().trim();
                             if (matcher.find()) {
-                                //docRef = db.collection("Resumes").document(phonenumber);
-                                next.setVisibility(View.INVISIBLE);
-                                otpView.setVisibility(View.VISIBLE);
-                                verify.setVisibility(View.VISIBLE);
-                                sendVerificationCode(phonenumber);
-                                otpView.requestFocus();
-                                verify.setOnClickListener(new View.OnClickListener() {
+                                docRef = db.collection("Resumes").document(phoneno.getText().toString().trim());
+                                docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                     @Override
-                                    public void onClick(View v) {
-                                        String code = otpView.getText().toString().trim();
-                                        if(code.isEmpty() || code.length()<6){
-                                            Toast.makeText(getApplicationContext(),"Invalid OTP",Toast.LENGTH_SHORT);
-                                            return;
-                                        }
-                                        else{
-                                            progress.setVisibility(View.VISIBLE);
-                                            verifyCode(code);
+                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                        if(task.isSuccessful()){
+                                            DocumentSnapshot documentSnapshot = task.getResult();
+                                            if(documentSnapshot.exists()){
+                                                Toast.makeText(getApplicationContext(),"You have Already applied for job",Toast.LENGTH_SHORT).show();
+                                            }
+                                            else{
+                                                next.setVisibility(View.INVISIBLE);
+                                                otpView.setVisibility(View.VISIBLE);
+                                                verify.setVisibility(View.VISIBLE);
+                                                sendVerificationCode(phonenumber);
+                                                otpView.requestFocus();
+                                                verify.setOnClickListener(new View.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(View v) {
+                                                        String code = otpView.getText().toString().trim();
+                                                        if(code.isEmpty() || code.length()<6){
+                                                            Toast.makeText(getApplicationContext(),"Invalid OTP",Toast.LENGTH_SHORT).show();
+                                                            return;
+                                                        }
+                                                        else{
+                                                            progress.setVisibility(View.VISIBLE);
+                                                            verifyCode(code);
+                                                        }
+                                                    }
+                                                });
+                                            }
                                         }
                                     }
                                 });
@@ -137,7 +154,17 @@ public class Home extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     bottomSheetDialog.dismiss();
+                    Map<String, Object> doc = new HashMap<>();
+                    doc.put("Score","0");
+                    doc.put("State",false);
+                    Map<String, Object> commondoc = new HashMap<>();
+                    commondoc.put("State",false);
                     Intent intent = new Intent(Home.this,Details.class);
+                    db.collection("Resumes").document(phoneno.getText().toString().trim()).set(doc);
+                    db.collection("Resumes").document(phoneno.getText().toString().trim()).collection("PersonalDetails").document("1").set(commondoc);
+                    db.collection("Resumes").document(phoneno.getText().toString().trim()).collection("EducationalDetails").document("1").set(commondoc);
+                    db.collection("Resumes").document(phoneno.getText().toString().trim()).collection("SkillDetails").document("1").set(commondoc);
+                    intent.putExtra("phonenumber",phoneno.getText().toString().trim());
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                 }

@@ -52,6 +52,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="Name"
+                    android:id="@+id/input_name"
                     android:inputType="text"
                     android:backgroundTint="#0f0" />
 
@@ -71,6 +72,7 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:id="@+id/input_email"
                     android:hint="Email"
                     android:inputType="textEmailAddress"
                     android:backgroundTint="#0f0" />
@@ -115,8 +117,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="Address"
+                    android:id="@+id/input_address"
                     android:inputType="textMultiLine"
-                    android:lines="3"
+                    android:lines="4"
                     android:minLines="1"
                     android:gravity="top|left"
                     android:scrollbars="vertical"
@@ -140,6 +143,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="Mobile Number"
+                    android:id="@+id/input_mobilenumber"
                     android:enabled="false"
                     android:inputType="number"
                     android:backgroundTint="#0f0" />
