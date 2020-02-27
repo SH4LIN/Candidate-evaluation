@@ -20,10 +20,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class QuizActivity extends AppCompatActivity {
+public class cpdquiz extends AppCompatActivity {
 
-    Button b1,b2,b3,b4;
-    TextView t1_question,timertxt;
+    Button b1,b2,b3,b4,b5;
+    TextView timertxt;
     CountDownTimer cdt;
     int total = 1;
     int correct = 0;
@@ -40,8 +40,8 @@ public class QuizActivity extends AppCompatActivity {
         b2 = (Button) findViewById(R.id.button2);
         b3 = (Button) findViewById(R.id.button3);
         b4 =(Button) findViewById(R.id.button4);
+        b5 = (Button) findViewById(R.id.button5);
 
-        t1_question = (TextView) findViewById(R.id.questiontxt);
         timertxt  = (TextView) findViewById(R.id.timerTxt);
 
         reverseTimer(30,timertxt);
@@ -53,7 +53,7 @@ public class QuizActivity extends AppCompatActivity {
     private void updateQuetion() {
 
         total++;
-        if (total > 100)
+        if (total > 10)
         {
 
         }
@@ -64,7 +64,6 @@ public class QuizActivity extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                     final Question question = dataSnapshot.getValue(Question.class);
-                    t1_question.setText(question.getQuestion());
                     b1.setText(question.getOption1());
                     b2.setText(question.getOption2());
                     b3.setText(question.getOption3());
@@ -314,18 +313,18 @@ public class QuizActivity extends AppCompatActivity {
             @Override
             public void onTick(long l) {
                 int seconds = (int)(l / 1000);
-                    int minutes = seconds / 60;
-                    seconds = seconds % 60;
-                    tv.setText(String.format("%02d",minutes)
-                            + ":" + String.format("%02d",seconds));
+                int minutes = seconds / 60;
+                seconds = seconds % 60;
+                tv.setText(String.format("%02d",minutes)
+                        + ":" + String.format("%02d",seconds));
 
             }
 
             @Override
             public void onFinish() {
 
-               updateQuetion();
-               reverseTimer(30,timertxt);
+                updateQuetion();
+                reverseTimer(30,timertxt);
 
             }
         }.start();
