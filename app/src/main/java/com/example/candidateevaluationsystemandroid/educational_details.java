@@ -19,6 +19,8 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -32,8 +34,11 @@ public class educational_details extends AppCompatActivity {
     TextInputLayout instituteInputLayout, collegeInputLayout, offieldInputLayout;
     String courseString;
     EditText startyr,passyr,cpi,experience;
+    FirebaseUser user;
     String instituteText,newspinnerText,startyrText,passyrText,cpiText,experienceText;
     FirebaseFirestore db;
+    int expScore[] = {1,2,4,6,8,10,12,14,16,18,20};
+    static int score;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,29 +51,26 @@ public class educational_details extends AppCompatActivity {
                     Map<String, Object> edudetails= new HashMap<>();
                     edudetails.put("Institute",instituteText);
                     edudetails.put("Branch",courseString);
-                    if(instituteText.equals("Dim University")){
-                        newspinnerText = newSpiner.getSelectedItem().toString();
-                        edudetails.put("College",newspinnerText);
-                    }
+                    edudetails.put("College",newspinnerText);
                     edudetails.put("CPI",cpiText);
                     edudetails.put("Start_Year",startyrText);
                     edudetails.put("Pass_Year",passyrText);
                     edudetails.put("Experience",experienceText);
-                    Intent intent = new Intent(educational_details.this, Skills_Specialities.class);
-                    intent.putExtra("str", courseString);
-                    String str = getIntent().getStringExtra("phonenumber");
-                    db.collection("Resumes").document(str).collection("EducationalDetails").document("1").set(edudetails).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    getScore();
+                    db.collection("Resumes").document(user.getPhoneNumber()).collection("EducationalDetails").document("1").set(edudetails).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                            if(task.isSuccessful()) {
-                               Toast.makeText(educational_details.this, "Added", Toast.LENGTH_SHORT).show();
+                               Intent intent = new Intent(educational_details.this, Skills_Specialities.class);
+                               intent.putExtra("str", courseString);
+                               db.collection("Resumes").document(user.getPhoneNumber()).update("Score",""+score);
+                               startActivity(intent);
                            }
                            else{
-                               Toast.makeText(educational_details.this, "Added", Toast.LENGTH_SHORT).show();
+                               Toast.makeText(educational_details.this, "Error In Server", Toast.LENGTH_SHORT).show();
                            }
                         }
                     });
-                    startActivity(intent);
                 }
                 else{
                     Toast.makeText(educational_details.this, "Enter Required Fields", Toast.LENGTH_SHORT).show();
@@ -88,40 +90,9 @@ public class educational_details extends AppCompatActivity {
         });
         List<String> institutes = new ArrayList<String>();
         institutes.add("Gujarat Technological University");
-        institutes.add("Gujarat University");
-        institutes.add("Dim University");
         ArrayAdapter arrayAdapter = new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item,institutes);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         institute.setAdapter(arrayAdapter);
-
-        //MADE BY R∆VI
-
-        //For spinner visibility [VISIBLE or GONE]
-        institute.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
-                // String selectedItemText = (String) parent.getItemAtPosition(position);
-
-                if (position == 2){
-                    newSpiner.setVisibility(View.VISIBLE);
-                    toSlide(view);
-                }
-                else {
-                    newSpiner.setVisibility(View.GONE);
-
-                    //ITS JUST LAYOUT_BELOW PROGRAMMATICALLY
-                    RelativeLayout.LayoutParams lp3 = (RelativeLayout.LayoutParams) offieldInputLayout.getLayoutParams();
-                    lp3.addRule(RelativeLayout.BELOW, instituteInputLayout.getId());
-                    offieldInputLayout.setLayoutParams(lp3);
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
 
         List<String> offield = new ArrayList<String>();
         offield.add("Computer Engineering");
@@ -136,29 +107,16 @@ public class educational_details extends AppCompatActivity {
         college.add("Nirma");
         college.add("Indus");
         college.add("LD");
+        college.add("VGEC");
+        college.add("PDPU");
+        college.add("GIT");
         ArrayAdapter collegeAdapter = new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item,college);
         collegeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         newSpiner.setAdapter(collegeAdapter);
     }
 
-    //FUNCTION FOR SLIDE ANIMATION ON SPINNER
-    public void toSlide(View view){
-
-        //ITS JUST LAYOUT_BELOW PROGRAMMATICALLY
-        RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) collegeInputLayout.getLayoutParams();
-        lp.addRule(RelativeLayout.BELOW, instituteInputLayout.getId());
-        collegeInputLayout.setLayoutParams(lp);
-
-        RelativeLayout.LayoutParams lp2 = (RelativeLayout.LayoutParams) offieldInputLayout.getLayoutParams();
-        lp2.addRule(RelativeLayout.BELOW, collegeInputLayout.getId());
-        offieldInputLayout.setLayoutParams(lp2);
-
-        //FOR ANIMATION
-        Animation animation = AnimationUtils.loadAnimation(this,R.anim.spinner_slide_animation);
-        newSpiner.startAnimation(animation);
-    }
-
     public void findViewsById(){
+        newSpiner = findViewById(R.id.newSpinner);
         institute = (Spinner) findViewById(R.id.input_institute);
         course = (Spinner) findViewById(R.id.input_studyoffield);
         next2 = (Button) findViewById(R.id.next2);
@@ -166,12 +124,8 @@ public class educational_details extends AppCompatActivity {
         passyr = findViewById(R.id.passingyear);
         cpi = findViewById(R.id.input_cpi);
         experience = findViewById(R.id.yearexperience);
+        user = FirebaseAuth.getInstance().getCurrentUser();
         db = FirebaseFirestore.getInstance();
-        //MADE BY R∆VI
-        newSpiner = (Spinner) findViewById(R.id.newSpinner);
-        instituteInputLayout = (TextInputLayout) findViewById(R.id.input_layout_institute);
-        collegeInputLayout = (TextInputLayout) findViewById(R.id.layout_newSpinner);
-        offieldInputLayout = (TextInputLayout) findViewById(R.id.input_layout_studyoffield);
     }
     public boolean validate(){
         instituteText = institute.getSelectedItem().toString();
@@ -179,6 +133,7 @@ public class educational_details extends AppCompatActivity {
         startyrText = startyr.getText().toString();
         passyrText = passyr.getText().toString();
         cpiText = cpi.getText().toString().trim();
+        newspinnerText = newSpiner.getSelectedItem().toString();
         experienceText = experience.getText().toString();
         if(startyrText.isEmpty()){
             startyr.setError("Required");
@@ -197,5 +152,60 @@ public class educational_details extends AppCompatActivity {
             return false;
         }
         return true;
+    }
+    public void getScore(){
+        score = 0;
+        //College Score
+        score += 5;
+        switch(newspinnerText){
+            case "Nirma":
+                score += 5;
+                break;
+
+            case "LD":
+                score += 5;
+                break;
+
+            case "VGEC":
+                score += 5;
+                break;
+
+            case "PDPU":
+                score += 5;
+                break;
+        }
+        //CPI Score
+        if(Double.parseDouble(cpiText)<=10 && Double.parseDouble(cpiText)>=9){
+            score += 20;
+        }
+        else if(Double.parseDouble(cpiText)<=9 && Double.parseDouble(cpiText)>=8){
+            score += 16;
+        }
+        else if(Double.parseDouble(cpiText)<8 && Double.parseDouble(cpiText)>=7){
+            score += 12;
+        }
+        else if(Double.parseDouble(cpiText)<7 && Double.parseDouble(cpiText)>=6){
+            score += 8;
+        }
+        else if(Double.parseDouble(cpiText)<6 && Double.parseDouble(cpiText)>=5){
+            score += 4;
+        }
+        else if(Integer.parseInt(cpiText)<5){
+            score += 0;
+        }
+        else{
+            score += 0;
+        }
+        //Experience Score
+        if(Integer.parseInt(experienceText) >= 11){
+            score += 20;
+        }
+        else if(Integer.parseInt(experienceText)<0){
+
+        }
+        else{
+            score += expScore[Integer.parseInt(experienceText)];
+        }
+        Toast.makeText(this, "Score:"+score, Toast.LENGTH_SHORT).show();
     }
 }

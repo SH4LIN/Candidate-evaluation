@@ -12,7 +12,9 @@
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="adjustPan"
         tools:replace="android:icon">
-        <activity android:name=".AdminSide"></activity>
+        <activity android:name=".Result"></activity>
+        <activity android:name=".QuizAptitude" />
+        <activity android:name=".AdminSide" />
         <activity android:name=".splash" />
         <activity android:name=".Skills_Specialities" />
         <activity android:name=".educational_details" />

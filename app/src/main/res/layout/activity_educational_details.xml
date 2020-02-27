@@ -59,7 +59,25 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/input_layout_institute"
+                        android:id="@+id/layout_newSpinner"
+                        android:layout_below="@+id/input_layout_institute"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        >
+
+                        <Spinner
+                            android:id="@+id/newSpinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/layout_newSpinner"
                         android:id="@+id/input_layout_studyoffield"
                         android:layout_marginTop="30dp"
                         android:layout_marginStart="20dp"
@@ -98,27 +116,8 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/layout_newSpinner"
-                        android:layout_marginTop="30dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp"
-                        >
-
-                        <Spinner
-                            android:id="@+id/newSpinner"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:visibility="gone"/>
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
                         android:layout_below="@id/input_layout_cpi"
                         android:id="@+id/input_layout_startyear"
-
                         android:layout_marginTop="30dp"
                         android:layout_marginStart="20dp"
                         android:layout_marginEnd="20dp"

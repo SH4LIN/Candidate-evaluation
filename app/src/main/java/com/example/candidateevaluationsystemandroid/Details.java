@@ -10,6 +10,9 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Calendar;
@@ -21,33 +24,17 @@ public class Details extends AppCompatActivity implements DatePickerDialog.OnDat
     private Calendar mcalendar;
     private DatePickerDialog datePickerDialog;
     private int day,month,year;
+    FirebaseUser user;
     Button next;
     private FirebaseFirestore db;
     static String mobilenumtext,nameText,dobText,emailText,addressText;
-
-    @Override
-     public void onSaveInstanceState(Bundle savedInstanceState){
-        savedInstanceState.putString("Mobile_Number",Home.phonenumber);
-        super.onSaveInstanceState(savedInstanceState);
-     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
         findViewsById();
-        if(savedInstanceState != null){
-            mobilenum.setText(savedInstanceState.getString("Mobile_Number"));
-            if(mobilenum.getText().toString().trim() == null){
-                mobilenum.setEnabled(true);
-            }
-        }
-        else{
-            mobilenum.setText(Home.phonenumber);
-            if(mobilenum.getText().toString().trim() == null){
-                mobilenum.setEnabled(true);
-            }
-        }
+        mobilenum.setText(user.getPhoneNumber());
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,10 +47,8 @@ public class Details extends AppCompatActivity implements DatePickerDialog.OnDat
                     personalDetails.put("Address",addressText);
                     personalDetails.put("Mobile",mobilenumtext);
                     personalDetails.put("State",true);
-                    String str = getIntent().getStringExtra("phonenumber");
-                    db.collection("Resumes").document(str).collection("PersonalDetails").document("1").set(personalDetails);
+                    db.collection("Resumes").document(user.getPhoneNumber()).collection("PersonalDetails").document("1").set(personalDetails);
                     Intent intent = new Intent(Details.this, educational_details.class);
-                    intent.putExtra("phonenumber",str);
                     startActivity(intent);
                 }
                 else {
@@ -96,6 +81,7 @@ public class Details extends AppCompatActivity implements DatePickerDialog.OnDat
         email = findViewById(R.id.input_email);
         address = findViewById(R.id.input_address);
         mcalendar = Calendar.getInstance();
+        user = FirebaseAuth.getInstance().getCurrentUser();
         dob = (EditText) findViewById(R.id.input_birthdate);
         next = (Button) findViewById(R.id.next1);
         datePickerDialog = new DatePickerDialog(Details.this, this, day, month, year);

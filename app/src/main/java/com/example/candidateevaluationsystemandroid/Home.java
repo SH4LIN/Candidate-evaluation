@@ -100,16 +100,14 @@ public class Home extends AppCompatActivity {
                             matcher = pattern.matcher(phoneno.getText().toString());
                             phonenumber = "+91" + phoneno.getText().toString().trim();
                             if (matcher.find()) {
-                                docRef = db.collection("Resumes").document(phoneno.getText().toString().trim());
+                                docRef = db.collection("Resumes").document(phonenumber);
                                 docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                     @Override
                                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                         if(task.isSuccessful()){
                                             DocumentSnapshot documentSnapshot = task.getResult();
-                                            if(documentSnapshot.exists()){
-                                                Toast.makeText(getApplicationContext(),"You have Already applied for job",Toast.LENGTH_SHORT).show();
-                                            }
-                                            else{
+                                            Boolean state = documentSnapshot.getBoolean("State");
+                                            if(state == null){
                                                 next.setVisibility(View.INVISIBLE);
                                                 otpView.setVisibility(View.VISIBLE);
                                                 verify.setVisibility(View.VISIBLE);
@@ -129,6 +127,30 @@ public class Home extends AppCompatActivity {
                                                         }
                                                     }
                                                 });
+                                            }
+                                            else if(!state){
+                                                next.setVisibility(View.INVISIBLE);
+                                                otpView.setVisibility(View.VISIBLE);
+                                                verify.setVisibility(View.VISIBLE);
+                                                sendVerificationCode(phonenumber);
+                                                otpView.requestFocus();
+                                                verify.setOnClickListener(new View.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(View v) {
+                                                        String code = otpView.getText().toString().trim();
+                                                        if(code.isEmpty() || code.length()<6){
+                                                            Toast.makeText(getApplicationContext(),"Invalid OTP",Toast.LENGTH_SHORT).show();
+                                                            return;
+                                                        }
+                                                        else{
+                                                            progress.setVisibility(View.VISIBLE);
+                                                            verifyCode(code);
+                                                        }
+                                                    }
+                                                });
+                                            }
+                                            else{
+                                                Toast.makeText(getApplicationContext(),"You have Already applied for job",Toast.LENGTH_SHORT).show();
                                             }
                                         }
                                     }
@@ -160,11 +182,10 @@ public class Home extends AppCompatActivity {
                     Map<String, Object> commondoc = new HashMap<>();
                     commondoc.put("State",false);
                     Intent intent = new Intent(Home.this,Details.class);
-                    db.collection("Resumes").document(phoneno.getText().toString().trim()).set(doc);
-                    db.collection("Resumes").document(phoneno.getText().toString().trim()).collection("PersonalDetails").document("1").set(commondoc);
-                    db.collection("Resumes").document(phoneno.getText().toString().trim()).collection("EducationalDetails").document("1").set(commondoc);
-                    db.collection("Resumes").document(phoneno.getText().toString().trim()).collection("SkillDetails").document("1").set(commondoc);
-                    intent.putExtra("phonenumber",phoneno.getText().toString().trim());
+                    db.collection("Resumes").document(phonenumber).set(doc);
+                    db.collection("Resumes").document(phonenumber).collection("PersonalDetails").document("1").set(commondoc);
+                    db.collection("Resumes").document(phonenumber).collection("EducationalDetails").document("1").set(commondoc);
+                    db.collection("Resumes").document(phonenumber).collection("SkillDetails").document("1").set(commondoc);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                 }
@@ -226,6 +247,13 @@ public class Home extends AppCompatActivity {
             bottomSheetDialogLogin = new BottomSheetDialog(Home.this, R.style.BottomSheetDialogTheme);
             bottomSheetDialogLogin.setContentView(R.layout.bottomsheetlogin);
             bottomSheetDialogLogin.setCanceledOnTouchOutside(false);
+            Button loginbtn = bottomSheetDialogLogin.findViewById(R.id.loginbtn);
+            loginbtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(Home.this,QuizAptitude.class));
+                }
+            });
             bottomSheetDialogLogin.show();
         }
     };
