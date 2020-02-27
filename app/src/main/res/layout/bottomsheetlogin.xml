@@ -74,14 +74,16 @@
                         android:layout_marginTop="10dp"
                         android:layout_centerInParent="true"
                         android:ems="10"
+                        android:inputType="text"
                         android:maxLength="10"
-                        android:inputType="number" />
+                        />
 
                     <TextView
                         android:id="@+id/msgpass"
                         android:layout_below="@id/username"
                         android:textSize="20dp"
                         android:fontFamily="serif"
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
@@ -92,14 +94,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/msgpass"
+                        android:inputType="textPassword"
                         android:animateLayoutChanges="true"
                         android:layout_centerHorizontal="true"
+                        android:id="@+id/password"
                         android:layout_marginTop="10dp"
                         android:layout_centerInParent="true"
                         android:ems="10"
                         android:layout_marginBottom="20dp"
                         android:maxLength="10"
-                        android:inputType="number" />
+                        />
 
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>

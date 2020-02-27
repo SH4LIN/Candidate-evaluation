@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Requirement">
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/deadline"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="serif"
+        android:layout_marginTop="30dp">
+
+        <EditText
+            android:id="@+id/edtdeadline"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:inputType="date"
+            android:hint="Deadline"
+            android:textSize="20dp"
+            android:fontFamily="serif"
+            android:focusable="false"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/txtlang"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Languages"
+        android:layout_below="@id/deadline"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="32dp"
+        android:fontFamily="serif"
+        android:textSize="20dp"
+        />
+
+    <CheckBox
+        android:id="@+id/checkBoxandroid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtlang"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="32dp"
+        android:fontFamily="serif"
+        android:text="Android" />
+    <CheckBox
+        android:id="@+id/checkBoxjava"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtlang"
+        android:layout_toRightOf="@id/checkBoxandroid"
+        android:layout_marginLeft="55dp"
+        android:layout_marginTop="32dp"
+        android:fontFamily="serif"
+        android:text="Java" />
+    <CheckBox
+        android:id="@+id/checkBoxCpluse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/checkBoxandroid"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="22dp"
+        android:fontFamily="serif"
+        android:text="C++" />
+    <CheckBox
+        android:id="@+id/checkBoxPHP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/checkBoxandroid"
+        android:layout_toRightOf="@+id/checkBoxCpluse"
+        android:layout_marginLeft="79dp"
+        android:layout_marginTop="22dp"
+        android:fontFamily="serif"
+        android:text="PHP" />
+
+    <CheckBox
+        android:id="@+id/checkBoxpython"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/checkBoxPHP"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="22dp"
+        android:fontFamily="serif"
+        android:text="Python" />
+
+    <CheckBox
+        android:id="@+id/checkBoxreactnative"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/checkBoxPHP"
+        android:layout_toRightOf="@+id/checkBoxpython"
+        android:layout_marginLeft="61dp"
+        android:layout_marginTop="22dp"
+        android:fontFamily="serif"
+        android:text="React Native" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_below="@+id/checkBoxpython"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/nocandicontainer"
+        android:fontFamily="serif"
+        android:layout_marginTop="30dp">
+
+        <EditText
+            android:id="@+id/edtnocandidate"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:ems="10"
+            android:inputType="number"
+            android:textSize="20dp"
+            android:fontFamily="serif"
+            android:hint="Number of Candidate"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_below="@+id/nocandicontainer"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/skillscontainer"
+        android:fontFamily="serif"
+        android:layout_marginTop="30dp">
+
+        <EditText
+            android:id="@+id/edtskills"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:textSize="20dp"
+            android:fontFamily="serif"
+            android:hint="Skills"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <ImageView
+        android:id="@+id/imageViewadd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/ic_add_circle_black_24dp"
+        android:layout_below="@+id/skillscontainer"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"/>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:fontFamily="serif"
+        android:layout_below="@+id/imageViewadd"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        />
+
+
+
+</RelativeLayout>

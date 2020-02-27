@@ -116,7 +116,6 @@ public class Skills_Specialities extends AppCompatActivity {
                 getScore();
                 builder = new AlertDialog.Builder(Skills_Specialities.this);
                 builder.setMessage("Warning!");
-                builder.setIcon(R.drawable.alert);
                 builder.setMessage("AFTER PRESSING OK YOU WON'T BE ABLE TO EDIT DETAILS").setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -142,6 +141,7 @@ public class Skills_Specialities extends AppCompatActivity {
                     }
                 });
                 AlertDialog alert = builder.create();
+                alert.setIcon(R.drawable.alert);
                 alert.show();
             }
         });

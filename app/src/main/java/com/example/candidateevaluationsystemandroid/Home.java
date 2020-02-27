@@ -49,6 +49,7 @@ public class Home extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private String verificationId;
     private DocumentReference docRef;
+    private EditText loginusername,loginpassword;
     private FirebaseFirestore db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -247,11 +248,15 @@ public class Home extends AppCompatActivity {
             bottomSheetDialogLogin = new BottomSheetDialog(Home.this, R.style.BottomSheetDialogTheme);
             bottomSheetDialogLogin.setContentView(R.layout.bottomsheetlogin);
             bottomSheetDialogLogin.setCanceledOnTouchOutside(false);
+            loginusername = bottomSheetDialogLogin.findViewById(R.id.username);
+            loginpassword = bottomSheetDialogLogin.findViewById(R.id.password);
             Button loginbtn = bottomSheetDialogLogin.findViewById(R.id.loginbtn);
             loginbtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(Home.this,QuizAptitude.class));
+                    if(loginusername.getText().toString().trim().equals("Admin") && loginpassword.getText().toString().trim().equals("Admin")) {
+                        startActivity(new Intent(Home.this, AdminSide.class));
+                    }
                 }
             });
             bottomSheetDialogLogin.show();
