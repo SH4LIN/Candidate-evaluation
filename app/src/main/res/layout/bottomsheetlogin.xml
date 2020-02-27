@@ -8,21 +8,22 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#252121"
+        android:backgroundTint="#252121">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <RelativeLayout
+                android:id="@+id/top"
                 android:layout_width="match_parent"
                 android:layout_height="170dp"
-                android:background="#ff5b5b"
                 android:layout_alignParentTop="true"
-                android:id="@+id/top"
-                >
+                android:background="@drawable/buttonback">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -30,99 +31,101 @@
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="20dp"
-                    android:fontFamily="serif"
+                    android:fontFamily="@font/cantata_one"
                     android:text="Login"
                     android:textColor="#ffffff"
-                    android:textStyle="bold"
                     android:textSize="20dp"
-                    />
+                    android:textStyle="bold" />
 
             </RelativeLayout>
 
             <androidx.cardview.widget.CardView
-                android:layout_width="300dp"
                 android:id="@+id/logincard"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:padding="100dp"
                 android:layout_below="@+id/top"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="-120dp"
                 android:elevation="50dp"
-                >
+                android:padding="100dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:background="#252121"
+                    android:backgroundTint="#252121">
 
                     <TextView
                         android:id="@+id/msgenter"
-                        android:textSize="20dp"
-                        android:fontFamily="serif"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="30dp"
-                        android:text="Enter Mobile Number" />
+                        android:fontFamily="@font/belleza"
+                        android:text="Enter Mobile Number"
+                        android:textColor="@android:color/white"
+                        android:textSize="20dp" />
 
                     <EditText
+                        android:id="@+id/username"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/msgenter"
-                        android:id="@+id/username"
-                        android:animateLayoutChanges="true"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="10dp"
                         android:layout_centerInParent="true"
+                        android:layout_marginTop="10dp"
+                        android:animateLayoutChanges="true"
+                        android:backgroundTint="#CF2D15"
                         android:ems="10"
                         android:inputType="text"
                         android:maxLength="10"
-                        />
+                        android:textColor="@android:color/white" />
 
                     <TextView
                         android:id="@+id/msgpass"
-                        android:layout_below="@id/username"
-                        android:textSize="20dp"
-                        android:fontFamily="serif"
-
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_below="@id/username"
+
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="30dp"
-                        android:text="Enter Password" />
+                        android:fontFamily="@font/belleza"
+                        android:text="Enter Password"
+                        android:textColor="@android:color/white"
+                        android:textSize="20dp" />
 
                     <EditText
+                        android:id="@+id/password"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/msgpass"
-                        android:inputType="textPassword"
-                        android:animateLayoutChanges="true"
-                        android:layout_centerHorizontal="true"
-                        android:id="@+id/password"
-                        android:layout_marginTop="10dp"
                         android:layout_centerInParent="true"
-                        android:ems="10"
+                        android:layout_marginTop="10dp"
                         android:layout_marginBottom="20dp"
+                        android:animateLayoutChanges="true"
+                        android:backgroundTint="#CF2D15"
+                        android:ems="10"
+                        android:inputType="textPassword"
                         android:maxLength="10"
-                        />
+                        android:textColor="@android:color/white" />
 
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
+
             <Button
+                android:id="@+id/loginbtn"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:layout_marginLeft="55dp"
-                android:layout_marginRight="55dp"
                 android:layout_below="@id/logincard"
-                android:text="Login"
-                android:textStyle="bold"
-                android:fontFamily="serif"
-                android:id="@+id/loginbtn"
-                android:animateLayoutChanges="true"
-                android:textColor="#ffffff"
-                android:background="@drawable/button"
                 android:layout_centerHorizontal="true"
+                android:layout_marginLeft="55dp"
                 android:layout_marginTop="20dp"
-                />
+                android:layout_marginRight="55dp"
+                android:animateLayoutChanges="true"
+                android:background="@drawable/buttonback"
+                android:fontFamily="serif"
+                android:text="Login"
+                android:textColor="#ffffff"
+                android:textStyle="bold" />
 
             <ProgressBar
                 android:id="@+id/progressBar"
@@ -130,8 +133,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/otp"
-                android:layout_marginTop="-55dp"
                 android:layout_centerHorizontal="true"
+                android:layout_marginTop="-55dp"
                 android:visibility="invisible" />
 
 
