@@ -31,7 +31,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Skills And Specialization"
-                        android:id="@+id/title2"
+                        android:id="@+id/title1"
                         android:autoSizeTextType="uniform"
                         android:autoSizeMinTextSize="20sp"
                         android:autoSizeMaxTextSize="200sp"
@@ -41,35 +41,280 @@
                         android:fontFamily="serif"
                         android:layout_marginTop="10dp"/>
 
-                    <com.google.android.material.textfield.TextInputLayout
+                    <TextView
+                        android:id="@+id/title2"
+                        android:layout_marginTop="15dp"
+                        android:layout_below="@id/title1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="SKILLS"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="20dp"
+                        android:textSize="20dp">
+                    </TextView>
+
+                    <ScrollView
+                        android:id="@+id/innerscrollview1"
+                        android:layout_below="@id/title2"
+                        android:layout_marginTop="15dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="125dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            android:orientation="vertical" >
+
+                            <LinearLayout
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:paddingLeft="10dp"
+                                android:orientation="vertical">
+                                <CheckBox
+                                    android:id="@+id/checkBox1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="20dp"
+                                    android:text="CheckBox" />
+
+                                <CheckBox
+                                    android:id="@+id/checkBox2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="20dp"
+                                    android:text="CheckBox" />
+
+                                <CheckBox
+                                    android:id="@+id/checkBox3"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="20dp"
+                                    android:text="CheckBox" />
+
+                                <CheckBox
+                                    android:id="@+id/checkBox4"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="20dp"
+                                    android:text="CheckBox" />
+
+                                <CheckBox
+                                    android:id="@+id/checkBox5"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="20dp"
+                                    android:text="CheckBox" />
+
+                                <CheckBox
+                                    android:id="@+id/checkBox6"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="20dp"
+                                    android:text="CheckBox" />
+
+                                <CheckBox
+                                    android:id="@+id/checkBox7"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="20dp"
+                                    android:text="CheckBox" />
+
+
+                                <CheckBox
+                                    android:id="@+id/checkBox8"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="20dp"
+                                    android:text="CheckBox" />
+
+                                <CheckBox
+                                    android:id="@+id/checkBox9"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="20dp"
+                                    android:text="CheckBox" />
+
+                                <CheckBox
+                                    android:id="@+id/checkBox10"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="20dp"
+                                    android:text="CheckBox" />
+
+                                <CheckBox
+                                    android:id="@+id/checkBox11"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="20dp"
+                                    android:text="CheckBox" />
+
+                                <CheckBox
+                                    android:id="@+id/checkBox12"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="20dp"
+                                    android:text="CheckBox" />
+
+                                <CheckBox
+                                    android:id="@+id/checkBox13"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="20dp"
+                                    android:text="CheckBox" />
+
+                                <CheckBox
+                                    android:id="@+id/checkBox14"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="20dp"
+                                    android:text="CheckBox" />
+
+                            </LinearLayout>
+
+                        </RelativeLayout>
+
+                    </ScrollView>
+
+                   <!-- <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/title2"
-                        android:id="@+id/input_layout_skills"
-                        android:layout_marginTop="30dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp">
+                        android:layout_below="@id/innerscrollview1"
+                        android:id="@+id/input_layout_otherskills"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="20dp"
+                        >
 
-                        <Spinner
-                            android:id="@+id/input_skills"
+                        <EditText
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1" />
+                            android:layout_height="match_parent"
+                            android:id="@+id/input_skill"
+                            android:backgroundTint="#0f0"
+                            android:hint="Other Skills"
+                            android:inputType="numberDecimal" />
 
-                    </com.google.android.material.textfield.TextInputLayout>
+
+                    </com.google.android.material.textfield.TextInputLayout>-->
+
+                    <TextView
+                        android:id="@+id/title3"
+                        android:layout_marginTop="20dp"
+                        android:layout_below="@id/innerscrollview1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="HOBBIES"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="20dp"
+                        android:textSize="20dp">
+                    </TextView>
+
+                    <ScrollView
+                        android:id="@+id/innerscrollview2"
+                        android:layout_below="@id/title3"
+                        android:layout_marginTop="15dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            android:orientation="vertical" >
+
+                            <LinearLayout
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:paddingLeft="10dp"
+                                android:orientation="vertical">
+
+                                <CheckBox
+                                    android:id="@+id/checkBox15"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="20dp"
+                                    android:text="Reading" />
+
+                                <CheckBox
+                                    android:id="@+id/checkBox16"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="20dp"
+                                    android:text="Writing" />
+
+                                <CheckBox
+                                    android:id="@+id/checkBox17"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="20dp"
+                                    android:text="Cycling" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:layout_marginLeft="150dp">
+
+                                <CheckBox
+                                    android:id="@+id/checkBox18"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="20dp"
+                                    android:text="Swimming" />
+
+                                <CheckBox
+                                    android:id="@+id/checkBox19"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="20dp"
+                                    android:text="Dancing" />
+
+                                <CheckBox
+                                    android:id="@+id/checkBox20"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="20dp"
+                                    android:text="Games" />
+
+                            </LinearLayout>
+
+                        </RelativeLayout>
+
+                    </ScrollView>
+
+                  <!--  <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/innerscrollview2"
+                        android:id="@+id/input_layout_otherhobbies"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="20dp"
+                        >
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/input_hobbies"
+                            android:backgroundTint="#0f0"
+                            android:hint="Other Hobbies"
+                            android:inputType="numberDecimal" />
+
+
+                    </com.google.android.material.textfield.TextInputLayout> -->
 
                     <Button
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Submit"
-                        android:layout_below="@id/input_layout_skills"
+                        android:layout_below="@id/innerscrollview2"
                         android:background="@drawable/button"
                         android:textColor="#fff"
                         android:fontFamily="serif"
                         android:id="@+id/submit1"
                         android:layout_marginEnd="30dp"
                         android:layout_marginStart="30dp"
-                        android:layout_marginTop="20dp"/>
+                        android:layout_marginTop="35dp"/>
 
                 </RelativeLayout>
             </LinearLayout>

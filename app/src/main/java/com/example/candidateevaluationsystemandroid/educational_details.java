@@ -206,6 +206,5 @@ public class educational_details extends AppCompatActivity {
         else{
             score += expScore[Integer.parseInt(experienceText)];
         }
-        Toast.makeText(this, "Score:"+score, Toast.LENGTH_SHORT).show();
     }
 }
