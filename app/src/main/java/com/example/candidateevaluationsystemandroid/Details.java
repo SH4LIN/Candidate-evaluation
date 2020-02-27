@@ -1,10 +1,15 @@
 package com.example.candidateevaluationsystemandroid;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
 import android.util.Patterns;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -15,27 +20,74 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Details extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     private EditText dob,mobilenum,name,email,address;
+    private  EditText common;
     private Calendar mcalendar;
     private DatePickerDialog datePickerDialog;
     private int day,month,year;
+    private static final int REQUEST_CODE = 100;
     FirebaseUser user;
     Button next;
     private FirebaseFirestore db;
     static String mobilenumtext,nameText,dobText,emailText,addressText;
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
         findViewsById();
         mobilenum.setText(user.getPhoneNumber());
+        address.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                common = address;
+                final int DRAWABLE_LEFT = 0;
+                final int DRAWABLE_TOP = 1;
+                final int DRAWABLE_RIGHT = 2;
+                final int DRAWABLE_BOTTOM = 3;
 
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    if (event.getRawX() >= (address.getRight() - address.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                        // your action here
+                        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+                        try {
+                            startActivityForResult(intent, REQUEST_CODE);
+                        } catch (ActivityNotFoundException a) {}
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
+        name.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                common = name;
+                final int DRAWABLE_LEFT = 0;
+                final int DRAWABLE_TOP = 1;
+                final int DRAWABLE_RIGHT = 2;
+                final int DRAWABLE_BOTTOM = 3;
+
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    if (event.getRawX() >= (name.getRight() - name.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                        // your action here
+                        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+                        try {
+                            startActivityForResult(intent, REQUEST_CODE);
+                        } catch (ActivityNotFoundException a) {}
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,5 +168,22 @@ public class Details extends AppCompatActivity implements DatePickerDialog.OnDat
             return false;
         }
         return true;
+    }
+    @Override
+
+//Handle the results//
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode) {
+            case REQUEST_CODE: {
+                if (resultCode == RESULT_OK && null != data) {
+                    ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                    common.setText(result.get(0));
+                }
+                break;
+            }
+        }
     }
 }

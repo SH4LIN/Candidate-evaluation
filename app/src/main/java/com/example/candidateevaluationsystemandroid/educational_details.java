@@ -3,8 +3,12 @@ package com.example.candidateevaluationsystemandroid;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -33,17 +37,107 @@ public class educational_details extends AppCompatActivity {
     Button next2;
     TextInputLayout instituteInputLayout, collegeInputLayout, offieldInputLayout;
     String courseString;
-    EditText startyr,passyr,cpi,experience;
+    EditText startyr,passyr,cpi,experience,common;
     FirebaseUser user;
     String instituteText,newspinnerText,startyrText,passyrText,cpiText,experienceText;
     FirebaseFirestore db;
     int expScore[] = {1,2,4,6,8,10,12,14,16,18,20};
     static int score;
+    private static final int REQUEST_CODE = 100;
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_educational_details);
         findViewsById();
+        cpi.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                common = cpi;
+                final int DRAWABLE_LEFT = 0;
+                final int DRAWABLE_TOP = 1;
+                final int DRAWABLE_RIGHT = 2;
+                final int DRAWABLE_BOTTOM = 3;
+
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    if (event.getRawX() >= (cpi.getRight() - cpi.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                        // your action here
+                        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+                        try {
+                            startActivityForResult(intent, REQUEST_CODE);
+                        } catch (ActivityNotFoundException a) {}
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
+        startyr.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                common = startyr;
+                final int DRAWABLE_LEFT = 0;
+                final int DRAWABLE_TOP = 1;
+                final int DRAWABLE_RIGHT = 2;
+                final int DRAWABLE_BOTTOM = 3;
+
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    if (event.getRawX() >= (startyr.getRight() - startyr.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                        // your action here
+                        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+                        try {
+                            startActivityForResult(intent, REQUEST_CODE);
+                        } catch (ActivityNotFoundException a) {}
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
+        passyr.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                common = passyr;
+                final int DRAWABLE_LEFT = 0;
+                final int DRAWABLE_TOP = 1;
+                final int DRAWABLE_RIGHT = 2;
+                final int DRAWABLE_BOTTOM = 3;
+
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    if (event.getRawX() >= (passyr.getRight() - passyr.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                        // your action here
+                        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+                        try {
+                            startActivityForResult(intent, REQUEST_CODE);
+                        } catch (ActivityNotFoundException a) {}
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
+        experience.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                common = experience;
+                final int DRAWABLE_LEFT = 0;
+                final int DRAWABLE_TOP = 1;
+                final int DRAWABLE_RIGHT = 2;
+                final int DRAWABLE_BOTTOM = 3;
+
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    if (event.getRawX() >= (experience.getRight() - experience.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                        // your action here
+                        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+                        try {
+                            startActivityForResult(intent, REQUEST_CODE);
+                        } catch (ActivityNotFoundException a) {}
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
         next2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -205,6 +299,23 @@ public class educational_details extends AppCompatActivity {
         }
         else{
             score += expScore[Integer.parseInt(experienceText)];
+        }
+    }
+    @Override
+
+//Handle the results//
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode) {
+            case REQUEST_CODE: {
+                if (resultCode == RESULT_OK && null != data) {
+                    ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                    common.setText(result.get(0));
+                }
+                break;
+            }
         }
     }
 }

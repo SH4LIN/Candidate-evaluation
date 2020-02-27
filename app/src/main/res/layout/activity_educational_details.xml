@@ -104,6 +104,7 @@
                             android:id="@+id/input_cpi"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:drawableRight="@drawable/ic_mic_black_24dp"
                             android:backgroundTint="@android:color/black"
                             android:hint="CPI"
                             android:inputType="numberDecimal" />
@@ -127,6 +128,7 @@
                             android:layout_height="match_parent"
                             android:backgroundTint="@android:color/black"
                             android:hint="College Starting Year"
+                            android:drawableRight="@drawable/ic_mic_black_24dp"
                             android:inputType="number"
                             android:maxLength="4" />
 
@@ -148,6 +150,7 @@
                             android:layout_height="match_parent"
                             android:backgroundTint="@android:color/black"
                             android:hint="College Passing Year"
+                            android:drawableRight="@drawable/ic_mic_black_24dp"
                             android:inputType="number"
                             android:maxLength="4" />
 
@@ -169,6 +172,7 @@
                             android:layout_height="match_parent"
                             android:backgroundTint="@android:color/black"
                             android:hint="Year of Experience"
+                            android:drawableRight="@drawable/ic_mic_black_24dp"
                             android:inputType="number"
                             android:maxLength="4" />
 
