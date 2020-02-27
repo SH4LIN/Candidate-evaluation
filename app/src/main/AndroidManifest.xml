@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.candidateevaluationsystemandroid">
 
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,10 +13,10 @@
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="adjustPan"
         tools:replace="android:icon">
-        <activity android:name=".Requirement"></activity>
+        <activity android:name=".Result"></activity>
+        <activity android:name=".QuizActivity" />
+        <activity android:name=".Requirement" />
         <activity android:name=".Candidatelist" />
-        <activity android:name=".Result" />
-        <activity android:name=".QuizAptitude" />
         <activity android:name=".AdminSide" />
         <activity android:name=".splash" />
         <activity android:name=".Skills_Specialities" />

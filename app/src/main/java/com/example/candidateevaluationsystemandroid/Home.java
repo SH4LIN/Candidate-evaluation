@@ -257,6 +257,11 @@ public class Home extends AppCompatActivity {
                     if(loginusername.getText().toString().trim().equals("Admin") && loginpassword.getText().toString().trim().equals("Admin")) {
                         startActivity(new Intent(Home.this, AdminSide.class));
                     }
+                    else
+                    {
+                        Intent intquiz = new Intent(Home.this,QuizActivity.class);
+                        startActivity(intquiz);
+                    }
                 }
             });
             bottomSheetDialogLogin.show();
