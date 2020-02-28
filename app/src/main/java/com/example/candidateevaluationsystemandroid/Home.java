@@ -255,11 +255,14 @@ public class Home extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     if(loginusername.getText().toString().trim().equals("Admin") && loginpassword.getText().toString().trim().equals("Admin")) {
-                        startActivity(new Intent(Home.this, AdminSide.class));
+                        Intent intent = new Intent(Home.this, AdminSide.class );
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
                     }
                     else
                     {
                         Intent intquiz = new Intent(Home.this,QuizActivity.class);
+                        intquiz.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intquiz);
                     }
                 }

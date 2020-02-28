@@ -109,6 +109,11 @@ public class cpdquiz extends AppCompatActivity {
                                 {
                                     b4.setBackgroundColor(Color.GREEN);
                                 }
+                                else if(b5.getText().toString().equals(question.getAnswer()))
+                                {
+                                    b5.setBackgroundColor(Color.GREEN);
+                                }
+
                                 Handler handler =new Handler();
                                 handler.postDelayed(new Runnable() {
                                     @Override
@@ -117,6 +122,7 @@ public class cpdquiz extends AppCompatActivity {
                                         b2.setBackgroundColor(Color.parseColor("#03a9f4"));
                                         b3.setBackgroundColor(Color.parseColor("#03a9f4"));
                                         b4.setBackgroundColor(Color.parseColor("#03a9f4"));
+                                        b5.setBackgroundColor(Color.parseColor("#03a9f4"));
 
                                         updateQuetion();
                                         cdt.cancel();
@@ -166,6 +172,11 @@ public class cpdquiz extends AppCompatActivity {
                                 {
                                     b4.setBackgroundColor(Color.GREEN);
                                 }
+                                else if(b5.getText().toString().equals(question.getAnswer()))
+                                {
+                                    b5.setBackgroundColor(Color.GREEN);
+                                }
+
                                 Handler handler =new Handler();
                                 handler.postDelayed(new Runnable() {
                                     @Override
@@ -174,6 +185,7 @@ public class cpdquiz extends AppCompatActivity {
                                         b2.setBackgroundColor(Color.parseColor("#03a9f4"));
                                         b3.setBackgroundColor(Color.parseColor("#03a9f4"));
                                         b4.setBackgroundColor(Color.parseColor("#03a9f4"));
+                                        b5.setBackgroundColor(Color.parseColor("#03a9f4"));
 
                                         updateQuetion();
                                         cdt.cancel();
@@ -220,6 +232,10 @@ public class cpdquiz extends AppCompatActivity {
                                 {
                                     b4.setBackgroundColor(Color.GREEN);
                                 }
+                                else if(b5.getText().toString().equals(question.getAnswer()))
+                                {
+                                    b5.setBackgroundColor(Color.GREEN);
+                                }
                                 Handler handler =new Handler();
                                 handler.postDelayed(new Runnable() {
                                     @Override
@@ -229,6 +245,7 @@ public class cpdquiz extends AppCompatActivity {
                                         b2.setBackgroundColor(Color.parseColor("#03a9f4"));
                                         b3.setBackgroundColor(Color.parseColor("#03a9f4"));
                                         b4.setBackgroundColor(Color.parseColor("#03a9f4"));
+                                        b5.setBackgroundColor(Color.parseColor("#03a9f4"));
 
                                         updateQuetion();
                                         cdt.cancel();
@@ -277,6 +294,11 @@ public class cpdquiz extends AppCompatActivity {
                                 {
                                     b3.setBackgroundColor(Color.GREEN);
                                 }
+                                else if(b5.getText().toString().equals(question.getAnswer()))
+                                {
+                                    b5.setBackgroundColor(Color.GREEN);
+                                }
+
                                 Handler handler =new Handler();
                                 handler.postDelayed(new Runnable() {
                                     @Override
@@ -285,6 +307,68 @@ public class cpdquiz extends AppCompatActivity {
                                         b2.setBackgroundColor(Color.parseColor("#03a9f4"));
                                         b3.setBackgroundColor(Color.parseColor("#03a9f4"));
                                         b4.setBackgroundColor(Color.parseColor("#03a9f4"));
+                                        b5.setBackgroundColor(Color.parseColor("#03a9f4"));
+
+                                        updateQuetion();
+                                        cdt.cancel();
+                                        reverseTimer(30,timertxt);
+                                    }
+                                },1500);
+
+                            }
+                        }
+                    });
+
+                    b5.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if (b4.getText().toString().equals(question.getAnswer()))
+                            {
+                                b4.setBackgroundColor(Color.GREEN);
+                                Handler handler =new Handler();
+                                handler.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        correct++;
+                                        b4.setBackgroundColor(Color.parseColor("#03A9f4"));
+                                        updateQuetion();
+                                        cdt.cancel();
+                                        reverseTimer(30,timertxt);
+
+                                    }
+                                },1500);
+                            }
+                            else {
+
+                                wrong++;
+                                b4.setBackgroundColor(Color.RED);
+                                if(b1.getText().toString().equals(question.getAnswer()))
+                                {
+                                    b1.setBackgroundColor(Color.GREEN);
+
+                                }
+                                else if (b2.getText().toString().equals(question.getAnswer()))
+                                {
+                                    b2.setBackgroundColor(Color.GREEN);
+                                }
+                                else if(b3.getText().toString().equals(question.getAnswer()))
+                                {
+                                    b3.setBackgroundColor(Color.GREEN);
+                                }
+                                else if(b4.getText().toString().equals(question.getAnswer()))
+                                {
+                                    b4.setBackgroundColor(Color.GREEN);
+                                }
+
+                                Handler handler =new Handler();
+                                handler.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        b1.setBackgroundColor(Color.parseColor("#03a9f4"));
+                                        b2.setBackgroundColor(Color.parseColor("#03a9f4"));
+                                        b3.setBackgroundColor(Color.parseColor("#03a9f4"));
+                                        b4.setBackgroundColor(Color.parseColor("#03a9f4"));
+                                        b5.setBackgroundColor(Color.parseColor("#03a9f4"));
 
                                         updateQuetion();
                                         cdt.cancel();

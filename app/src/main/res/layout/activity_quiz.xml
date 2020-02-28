@@ -9,103 +9,117 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#252121"
+        android:backgroundTint="#272525"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/questiontxt"
             android:layout_width="match_parent"
             android:layout_height="180dp"
-            android:textAlignment="center"
             android:padding="10dp"
-            android:textColor="#393737"
+            android:text=" Question     "
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
             android:textSize="28sp"
-            android:text=" Question     "/>
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="120dp"
-            android:padding="5dp"
-            android:paddingTop="5dp"
             android:layout_marginTop="10dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:paddingTop="5dp">
 
             <Button
                 android:id="@+id/button1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@color/bBg"
-                android:padding="10dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/button1"
+                android:fontFamily="@font/candal"
+                android:padding="10dp"
+                android:text="OPTION 1"
                 android:textAlignment="center"
-                android:textSize="20sp"
-                android:text="OPTION 1"/>
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
 
 
             <Button
                 android:id="@+id/button2"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@color/bBg"
-                android:padding="10dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/button1"
+                android:fontFamily="@font/candal"
+                android:padding="10dp"
+                android:text="OPTION 2"
                 android:textAlignment="center"
-                android:textSize="20sp"
-                android:text="OPTION 2"/>
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="120dp"
-            android:padding="5dp"
-            android:paddingTop="5dp"
             android:layout_marginTop="10dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:paddingTop="5dp">
 
             <Button
                 android:id="@+id/button3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@color/bBg"
-                android:padding="10dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/button1"
+                android:fontFamily="@font/candal"
+                android:padding="10dp"
+                android:text="OPTION 3"
                 android:textAlignment="center"
-                android:textSize="20sp"
-                android:text="OPTION 3"/>
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
 
 
             <Button
                 android:id="@+id/button4"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@color/bBg"
-                android:padding="10dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/button1"
+                android:fontFamily="@font/candal"
+                android:padding="10dp"
+                android:text="OPTION 4"
                 android:textAlignment="center"
-                android:textSize="20sp"
-                android:text="OPTION 4"/>
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="5dp">
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:id="@+id/timerTxt"
+                android:layout_width="match_parent"
+                android:layout_height="277dp"
+                android:background="@drawable/button1"
+                android:fontFamily="@font/candal"
                 android:text="00:00"
-                android:textSize="28sp"
-                android:textAlignment="center"/>
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:textSize="30sp" />
         </LinearLayout>
 
 

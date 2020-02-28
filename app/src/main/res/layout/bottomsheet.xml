@@ -74,7 +74,7 @@
                         android:layout_centerInParent="true"
                         android:layout_marginTop="10dp"
                         android:animateLayoutChanges="true"
-                        android:backgroundTint="#CF2D15"
+                        android:backgroundTint="@android:color/white"
                         android:ems="10"
                         android:inputType="number"
                         android:maxLength="10"
@@ -88,7 +88,7 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginBottom="10dp"
                         android:animateLayoutChanges="true"
-                        android:backgroundTint="#CF2D15"
+                        android:backgroundTint="@android:color/white"
                         android:inputType="number"
                         android:textColor="@android:color/white"
                         android:visibility="invisible"
@@ -96,7 +96,7 @@
                         app:itemCount="6"
                         app:itemHeight="30dp"
                         app:itemWidth="30dp"
-                        app:lineColor="#000000"
+                        app:lineColor="@android:color/white"
                         app:viewType="line" />
 
                     <Button

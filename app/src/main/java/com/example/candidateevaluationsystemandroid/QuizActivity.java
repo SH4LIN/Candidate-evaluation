@@ -20,12 +20,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Random;
+
 public class QuizActivity extends AppCompatActivity {
 
     Button b1,b2,b3,b4;
     TextView t1_question,timertxt;
     CountDownTimer cdt;
     int total = 1;
+    int questionnum;
     int correct = 0;
     DatabaseReference reference;
 
@@ -43,7 +46,6 @@ public class QuizActivity extends AppCompatActivity {
 
         t1_question = (TextView) findViewById(R.id.questiontxt);
         timertxt  = (TextView) findViewById(R.id.timerTxt);
-
         reverseTimer(30,timertxt);
         updateQuetion();
 
@@ -51,14 +53,25 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     private void updateQuetion() {
-
+        Random random = new Random();
+        while (true) {
+                questionnum = random.nextInt(100);
+                if(questionnum == 0){
+                    questionnum = random.nextInt(100);
+                    break;
+                }
+        }
         total++;
-        if (total > 100)
+        if (total > 10)
         {
-
+            Toast.makeText(this, ""+correct, Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(QuizActivity.this,CPDDELAY.class);
+            intent.putExtra("AppScore",correct);
+            startActivity(intent);
+            finish();
         }
         else {
-            reference = FirebaseDatabase.getInstance().getReference().child("Questions").child(String.valueOf(total));
+            reference = FirebaseDatabase.getInstance().getReference().child("Questions").child(String.valueOf(questionnum));
             reference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
