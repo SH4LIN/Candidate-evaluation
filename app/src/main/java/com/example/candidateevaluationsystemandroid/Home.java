@@ -257,12 +257,13 @@ public class Home extends AppCompatActivity {
                     if(loginusername.getText().toString().trim().equals("Admin") && loginpassword.getText().toString().trim().equals("Admin")) {
                         Intent intent = new Intent(Home.this, AdminSide.class );
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        bottomSheetDialogLogin.dismiss();
                         startActivity(intent);
                     }
-                    else
-                    {
+                    else if(loginusername.getText().toString().trim().equals("8320224014") && loginpassword.getText().toString().trim().equals("0944")){
                         Intent intquiz = new Intent(Home.this,QuizActivity.class);
                         intquiz.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        bottomSheetDialogLogin.dismiss();
                         startActivity(intquiz);
                     }
                 }

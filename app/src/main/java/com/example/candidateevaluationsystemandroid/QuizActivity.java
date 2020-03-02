@@ -27,7 +27,7 @@ public class QuizActivity extends AppCompatActivity {
     Button b1,b2,b3,b4;
     TextView t1_question,timertxt;
     CountDownTimer cdt;
-    int total = 1;
+    int total = 0;
     int questionnum;
     int correct = 0;
     DatabaseReference reference;
@@ -38,7 +38,7 @@ public class QuizActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
-
+        Toast.makeText(this, "Apptitude", Toast.LENGTH_SHORT).show();
         b1 = (Button) findViewById(R.id.button1);
         b2 = (Button) findViewById(R.id.button2);
         b3 = (Button) findViewById(R.id.button3);
@@ -62,11 +62,12 @@ public class QuizActivity extends AppCompatActivity {
                 }
         }
         total++;
-        if (total > 10)
+        if (total >= 10)
         {
             Toast.makeText(this, ""+correct, Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(QuizActivity.this,CPDDELAY.class);
+            Intent intent = new Intent(QuizActivity.this,Result.class);
             intent.putExtra("AppScore",correct);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             finish();
         }
